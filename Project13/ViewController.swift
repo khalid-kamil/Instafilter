@@ -30,6 +30,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         currentFilter = CIFilter(name: "CISepiaTone")
         changeFilterButton.setTitle(currentFilter.name, for: .normal)
         if imageView.image == nil {
+            imageView.alpha = 0
             changeIntensitySlider.isEnabled = false
             radius.isEnabled = false
         }
@@ -56,6 +57,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
         
         applyProcessing()
+        UIView.animate(withDuration: 1, delay: 0, options: [], animations: { self.imageView.alpha = 1}, completion: nil)
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
